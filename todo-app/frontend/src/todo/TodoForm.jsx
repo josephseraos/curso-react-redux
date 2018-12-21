@@ -6,7 +6,7 @@ export default props =>
     <div>
         <div className="form-row">
             <Grid cols={[12, 9, 10]}>
-                <input type="text" className="form-control" placeholder="Nome" autoFocus />
+                <input type="text" value={props.description} className="form-control" onChange={props.handleChange} placeholder="Nome" autoFocus />
             </Grid>
 
             <Grid cols={[12, 3, 2]}>
