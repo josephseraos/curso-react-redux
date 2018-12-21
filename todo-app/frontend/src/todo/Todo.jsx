@@ -21,11 +21,18 @@ class Todo extends Component {
         this.handleChange = this.handleChange.bind(this)
         this.handleAdd = this.handleAdd.bind(this)
         this.handleSearch = this.handleSearch.bind(this)
+        this.handleRemove = this.handleRemove.bind(this)
+
+        this.refresh()
+    }
+
+    refresh() {
+        axios.get(`${baseUrl}?sort=-createdAt`)
+            .then(resp => this.setState({description: '', list: resp.data}))
+            .then(resp => console.log(resp.data))
     }
 
     handleChange(e) {
-        console.log('Digitando...')
-
         this.setState({
             description: e.target.value
         })
@@ -36,7 +43,7 @@ class Todo extends Component {
 
         axios.post(baseUrl, { description })
             .then(resp => {
-                console.log(resp.data)
+                this.refresh()
             })
     }
 
@@ -44,12 +51,17 @@ class Todo extends Component {
         console.log('Buscando por tarefas')
     }
 
+    handleRemove(e, id) {
+        axios.delete(`${baseUrl}/${id}`)
+            .then(resp => this.refresh())
+    }
+
     render() {
         return (
             <Fragment>
                 <PageHeader name='Tarefas' small='Cadastro' />
                 <TodoForm description={ this.state.description } handleChange={this.handleChange} handleAdd={this.handleAdd} handleSearch={this.handleSearch} />
-                <TodoList />
+                <TodoList list={ this.state.list } handleRemove={this.handleRemove} />
             </Fragment>
         )
     }
