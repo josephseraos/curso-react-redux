@@ -1,10 +1,11 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 export default props => (
     <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
-        <a className="navbar-brand" href="#/todos">
+        <Link className="navbar-brand" to="/todos">
             <i class="fas fa-calendar-check"></i> Navbar
-        </a>
+        </Link>
 
         <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#conteudoNavbarSuportado" aria-controls="conteudoNavbarSuportado" aria-expanded="false" aria-label="Alterna navegação">
             <span className="navbar-toggler-icon"></span>
@@ -13,10 +14,10 @@ export default props => (
         <div className="collapse navbar-collapse" id="conteudoNavbarSuportado">
             <ul className="navbar-nav mr-auto">
                 <li className="nav-item active">
-                    <a className="nav-link" href="#/todos">Tarefas <span className="sr-only">(página atual)</span></a>
+                    <Link className="nav-link" to="/todos">Tarefas <span className="sr-only">(página atual)</span></Link>
                 </li>
                 <li className="nav-item">
-                    <a className="nav-link" href="#/about">Sobre</a>
+                    <Link className="nav-link" to="/about">Sobre</Link>
                 </li>
             </ul>
         </div>
