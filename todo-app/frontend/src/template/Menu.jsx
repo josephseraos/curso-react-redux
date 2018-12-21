@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 export default props => (
     <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
         <Link className="navbar-brand" to="/todos">
-            <i class="fas fa-calendar-check"></i> Navbar
+            <i className="fas fa-calendar-check"></i> Navbar
         </Link>
 
         <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#conteudoNavbarSuportado" aria-controls="conteudoNavbarSuportado" aria-expanded="false" aria-label="Alterna navegação">
