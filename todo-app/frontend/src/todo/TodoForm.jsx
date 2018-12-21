@@ -10,8 +10,8 @@ export default props =>
             </Grid>
 
             <Grid cols={[12, 3, 2]}>
-                <IconButton icon='plus' estilo='primary' />
-                {/* <button className="btn btn-default ml-2"><i className="fa fa-search"></i></button> */}
+                <IconButton icon='plus' estilo='primary' onClick={props.handleAdd} />
+                <IconButton icon='search' estilo='default' onClick={props.handleSearch} />
             </Grid>
         </div>
     </div>
