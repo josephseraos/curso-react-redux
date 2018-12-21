@@ -1,9 +1,10 @@
 import React, { Component } from 'react'
+import PageHeader from '../template/PageHeader'
 
 class Todo extends Component {
     render() {
         return (
-            <h1>Todo-App</h1>
+            <PageHeader name='Tarefas' small='Cadastro' />
         )
     }
 }
