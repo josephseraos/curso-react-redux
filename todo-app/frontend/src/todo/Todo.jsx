@@ -51,6 +51,8 @@ class Todo extends Component {
 
         axios.post(baseUrl, { description })
             .then(resp => { this.refresh() })
+        
+        document.querySelector('input[type=text]').focus()
     }
 
     handleRemove(e, item) {

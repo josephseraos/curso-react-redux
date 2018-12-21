@@ -7,3 +7,11 @@
     color: gray;
     font-style: italic
 }
+
+.table-action {
+    width: 120px;
+}
+
+.todo-form {
+    padding-bottom: 60px
+}
