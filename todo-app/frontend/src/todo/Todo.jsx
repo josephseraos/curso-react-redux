@@ -1,8 +1,11 @@
 import React, { Component, Fragment } from 'react'
-import PageHeader from '../template/PageHeader'
+import axios from 'axios'
 
+import PageHeader from '../template/PageHeader'
 import TodoForm from './TodoForm'
 import TodoList from './TodoList'
+
+const baseUrl = 'http://localhost:3003/api/todos'
 
 const initialState = {
     description: '',
@@ -29,8 +32,12 @@ class Todo extends Component {
     }
 
     handleAdd(e) {
-        console.log('Adicionando nova tarefa')
-        console.log(this.state.description)
+        const description = this.state.description
+
+        axios.post(baseUrl, { description })
+            .then(resp => {
+                console.log(resp.data)
+            })
     }
 
     handleSearch(e) {
