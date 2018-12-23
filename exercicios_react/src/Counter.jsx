@@ -1,8 +1,22 @@
 import React from 'react'
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
+import { inc, dec, stepChanged } from './counterActions'
 
 const Counter = props =>
     <div>
-        Contador
+        <h1>{props.counter.value}</h1>
+        <input type="number" value={props.counter.step} onChange={props.stepChanged} />
+        <button onClick={props.inc}>Inc</button>
+        <button onClick={props.dec}>Dec</button>
     </div>
 
-export default Counter
+const mapStateToProps = state => ({
+    counter: state.counter
+})
+
+const mapDispatchToProps = dispatch => bindActionCreators({
+    inc, dec, stepChanged
+}, dispatch)
+
+export default connect(mapStateToProps, mapDispatchToProps)(Counter)
