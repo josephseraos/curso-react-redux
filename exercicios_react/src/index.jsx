@@ -1,20 +1,18 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import { combineReducers, createStore } from 'redux'
+import { combineReducers, createStore } from 'redux';
 import { Provider } from 'react-redux'
 
-import counterReducer from './counterReducer'
+import calculadoraReducer from './calculadoraReducer'
+import Calculadora from './Calculadora'
 
-import Counter from './Counter'
-
-// objeto chave/valor em que as chaves são os componentes e valores são funções
 const reducers = combineReducers({
-    counter: counterReducer
+    calculadora: calculadoraReducer
 })
 
 ReactDOM.render(
-    <Provider store={createStore(reducers)}>
-        <Counter />
+    <Provider store={ createStore(reducers) }>
+        <Calculadora />
     </Provider>,
     document.getElementById('root')
 )
