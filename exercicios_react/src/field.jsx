@@ -1,25 +1,24 @@
-import React from 'react'
+import React, { Component } from 'react'
+import { connect } from 'react-redux'
 
-class Field extends React.Component {
-    constructor(props) {
-        super(props)
-        this.state = { valor: this.props.valor }
-        // this.state = { valor: undefined }
-        this.handleChanged = this.handleChanged.bind(this)
-    }
-
-    handleChanged(e) {
-        this.setState({valor: e.target.value})
-    }
-
+class Field extends Component {
     render() {
         return (
             <React.Fragment>
-                <h1>{this.state.valor}</h1>
-                <input type="text" value={this.state.valor} onChange={this.handleChanged} />
+                <h1>{this.props.valor}</h1>
+                <input type="text" value={this.props.valor} onChange={this.handleChanged} />
             </React.Fragment>
         )
     }
 }
 
-export default Field
+// decorator
+function mapStateToProps(state) {
+    return {
+        valor: state.field.value
+    }
+}
+
+// export default Field
+
+export default connect(mapStateToProps)(Field)
