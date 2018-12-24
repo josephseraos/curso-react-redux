@@ -1,12 +1,5 @@
 import axios from 'axios'
 
-const refresh = function(description = '') {
-    const search = description ? `&description__regex=/${description}/` : ''
-
-    axios.get(`${baseUrl}?sort=-createdAt${search}`)
-        .then(resp => this.setState({ description, list: resp.data }))
-}
-
 const baseUrl = 'http://192.168.0.190:3003/api/todos'
 
 const descriptionChanged = e => ({
@@ -14,29 +7,53 @@ const descriptionChanged = e => ({
     payload: e.target.value
 })
 
-const addClicked = e => ({
-    type: 'ADD_CLICKED'
-})
+// middleware redux-thunk
+const addClicked = description => {
+    return dispatch => {
+        axios.post(baseUrl, { description })
+            .then(resp => dispatch(clearClicked()))
+            .then(resp => dispatch(searchClicked()))
+    }
+}
 
-const searchClicked = e => ({
-    type: 'SEARCH_CLICKED'
-})
+// middleware redux-thunk
+const searchClicked = () => {
+    return (dispatch, getState) => {
+        const description = getState().todo.description
+        const search = description ? `&description__regex=/${description}/` : ''
+        axios.get(`${baseUrl}?sort=-createdAt${search}`)
+            .then(resp => dispatch({ type: 'SEARCH_CLICKED', payload: resp.data }))
+    }
+}
 
-const clearClicked = e => ({
+// middleware redux-multi
+const clearClicked = e => ([{
     type: 'CLEAR_CLICKED'
-})
+}, searchClicked()])
 
-const removeClicked = e => ({
-    type: 'REMOVE_CLICKED'
-})
+// middleware redux-thunk
+const removeClicked = item => {
+    return dispatch => {
+        axios.delete(`${baseUrl}/${item._id}`)
+            .then(resp => dispatch(searchClicked()))
+    }
+}
 
-const markAsDoneClicked = e => ({
-    type: 'MARKASDONE_CLICKED'
-})
+// middleware redux-thunk
+const markAsDoneClicked = item => {
+    return dispatch => {
+        axios.put(`${baseUrl}/${item._id}`, { ...item, done: true })
+            .then(resp => dispatch(searchClicked()))
+    }
+}
 
-const markAsPendingClicked = e => ({
-    type: 'MARKASPANDING_CLICKED'
-})
+// middleware redux-thunk
+const markAsPendingClicked = item => {
+    return dispatch => {
+        axios.put(`${baseUrl}/${item._id}`, { ...item, done: false })
+            .then(resp => dispatch(searchClicked()))
+    }
+}
 
 export {
     descriptionChanged,
