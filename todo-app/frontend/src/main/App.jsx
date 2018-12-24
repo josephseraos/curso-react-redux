@@ -9,7 +9,6 @@ import 'popper.js/dist/popper.min.js'
 import 'jquery/dist/jquery.min.js'
 import 'bootstrap/dist/js/bootstrap.min.js'
 
-
 import Routes from './Routes'
 import Menu from '../template/Menu'
 
